@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjpowernode.crm.workbench.mapper.TblClueRemarkMapper">
+  <resultMap id="BaseResultMap" type="com.bjpowernode.crm.workbench.domain.TblClueRemark">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="note_content" jdbcType="VARCHAR" property="noteContent" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="CHAR" property="createTime" />
+    <result column="edit_by" jdbcType="VARCHAR" property="editBy" />
+    <result column="edit_time" jdbcType="CHAR" property="editTime" />
+    <result column="edit_flag" jdbcType="CHAR" property="editFlag" />
+    <result column="clue_id" jdbcType="CHAR" property="clueId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, note_content, create_by, create_time, edit_by, edit_time, edit_flag, clue_id
+  </sql>
+  <select id="selectClueRemarkByClueId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+      r1.id,r1.note_content,u1.name create_by,  r1.create_time,
+      u2.name edit_by,  r1.edit_time,  r1.edit_flag,
+      r1.clue_id
+    from tbl_clue_remark r1
+    join tbl_user u1 on r1.create_by = u1.id
+    join tbl_user u2 on r1.edit_by = u2.id
+    where clue_id = #{id,jdbcType=CHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tbl_clue_remark
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bjpowernode.crm.workbench.domain.TblClueRemark" useGeneratedKeys="true">
+    insert into tbl_clue_remark (id,note_content, create_by, create_time,
+      edit_by, edit_time, edit_flag, 
+      clue_id)
+    values (#{id,jdbcType=CHAR},#{noteContent,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR},
+      #{editBy,jdbcType=VARCHAR}, #{editTime,jdbcType=CHAR}, #{editFlag,jdbcType=CHAR}, 
+      #{clueId,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.bjpowernode.crm.workbench.domain.TblClueRemark" useGeneratedKeys="true">
+    insert into tbl_clue_remark
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="noteContent != null">
+        note_content,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="editBy != null">
+        edit_by,
+      </if>
+      <if test="editTime != null">
+        edit_time,
+      </if>
+      <if test="editFlag != null">
+        edit_flag,
+      </if>
+      <if test="clueId != null">
+        clue_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="noteContent != null">
+        #{noteContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="editBy != null">
+        #{editBy,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null">
+        #{editTime,jdbcType=CHAR},
+      </if>
+      <if test="editFlag != null">
+        #{editFlag,jdbcType=CHAR},
+      </if>
+      <if test="clueId != null">
+        #{clueId,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bjpowernode.crm.workbench.domain.TblClueRemark">
+    update tbl_clue_remark
+    <set>
+      <if test="noteContent != null">
+        note_content = #{noteContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="editBy != null">
+        edit_by = #{editBy,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null">
+        edit_time = #{editTime,jdbcType=CHAR},
+      </if>
+      <if test="editFlag != null">
+        edit_flag = #{editFlag,jdbcType=CHAR},
+      </if>
+      <if test="clueId != null">
+        clue_id = #{clueId,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bjpowernode.crm.workbench.domain.TblClueRemark">
+    update tbl_clue_remark
+    set note_content = #{noteContent,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=CHAR},
+      edit_by = #{editBy,jdbcType=VARCHAR},
+      edit_time = #{editTime,jdbcType=CHAR},
+      edit_flag = #{editFlag,jdbcType=CHAR},
+      clue_id = #{clueId,jdbcType=CHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+
+  <select id="selectActivityRemarkByClueId" resultMap="BaseResultMap">
+    select a1.id,a1.note_content,a1.create_time,u1.name create_by,a1.edit_time,u2.name edit_by,a1.edit_flag,a1.clue_id
+    from tbl_clue_remark a1
+           join tbl_user u1
+                on a1.create_by = u1.id
+           join tbl_activity a2
+                on a2.id = a1.clue_id
+           join tbl_user u2
+                on u2.id = a2.edit_by
+    where a1.clue_id = #{activityId}
+  </select>
+  <delete id="deleteClueRemarkByClueId">
+    delete from tbl_clue_remark
+    where clue_id = #{clueId}
+  </delete>
+</mapper>

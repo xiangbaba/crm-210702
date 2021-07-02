@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjpowernode.crm.workbench.mapper.TblContactsActivityRelationMapper">
+  <resultMap id="BaseResultMap" type="com.bjpowernode.crm.workbench.domain.TblContactsActivityRelation">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="contacts_id" jdbcType="CHAR" property="contactsId" />
+    <result column="activity_id" jdbcType="CHAR" property="activityId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, contacts_id, activity_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_contacts_activity_relation
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tbl_contacts_activity_relation
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bjpowernode.crm.workbench.domain.TblContactsActivityRelation" useGeneratedKeys="true">
+    insert into tbl_contacts_activity_relation (contacts_id, activity_id)
+    values (#{contactsId,jdbcType=CHAR}, #{activityId,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.bjpowernode.crm.workbench.domain.TblContactsActivityRelation" useGeneratedKeys="true">
+    insert into tbl_contacts_activity_relation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contactsId != null">
+        contacts_id,
+      </if>
+      <if test="activityId != null">
+        activity_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contactsId != null">
+        #{contactsId,jdbcType=CHAR},
+      </if>
+      <if test="activityId != null">
+        #{activityId,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.bjpowernode.crm.workbench.domain.TblContactsActivityRelation">
+    update tbl_contacts_activity_relation
+    <set>
+      <if test="contactsId != null">
+        contacts_id = #{contactsId,jdbcType=CHAR},
+      </if>
+      <if test="activityId != null">
+        activity_id = #{activityId,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bjpowernode.crm.workbench.domain.TblContactsActivityRelation">
+    update tbl_contacts_activity_relation
+    set contacts_id = #{contactsId,jdbcType=CHAR},
+      activity_id = #{activityId,jdbcType=CHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+
+  <insert id="insertContactsActivityRelationByList">
+    insert into tbl_contacts_activity_relation
+    (id, contacts_id, activity_id)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id},#{item.contactsId},#{item.activityId})
+    </foreach>
+  </insert>
+</mapper>

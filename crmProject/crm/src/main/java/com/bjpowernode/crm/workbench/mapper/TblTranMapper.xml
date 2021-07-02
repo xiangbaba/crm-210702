@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjpowernode.crm.workbench.mapper.TblTranMapper">
+  <resultMap id="BaseResultMap" type="com.bjpowernode.crm.workbench.domain.TblTran">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="owner" jdbcType="CHAR" property="owner" />
+    <result column="money" jdbcType="VARCHAR" property="money" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="expected_date" jdbcType="CHAR" property="expectedDate" />
+    <result column="customer_id" jdbcType="CHAR" property="customerId" />
+    <result column="stage" jdbcType="VARCHAR" property="stage" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="activity_id" jdbcType="CHAR" property="activityId" />
+    <result column="contacts_id" jdbcType="CHAR" property="contactsId" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="CHAR" property="createTime" />
+    <result column="edit_by" jdbcType="VARCHAR" property="editBy" />
+    <result column="edit_time" jdbcType="CHAR" property="editTime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="contact_summary" jdbcType="VARCHAR" property="contactSummary" />
+    <result column="next_contact_time" jdbcType="CHAR" property="nextContactTime" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, `owner`, money, `name`, expected_date, customer_id, stage, `type`, `source`, 
+    activity_id, contacts_id, create_by, create_time, edit_by, edit_time, description, 
+    contact_summary, next_contact_time, order_no
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_tran
+    where id = #{id,jdbcType=CHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tbl_tran
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bjpowernode.crm.workbench.domain.TblTran" useGeneratedKeys="true">
+    insert into tbl_tran (id,`owner`, money, `name`,
+      expected_date, customer_id, stage, 
+      `type`, `source`, activity_id, 
+      contacts_id, create_by, create_time, 
+      edit_by, edit_time, description, 
+      contact_summary, next_contact_time, order_no
+      )
+    values (#{id,jdbcType=CHAR},#{owner,jdbcType=CHAR}, #{money,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+      #{expectedDate,jdbcType=CHAR}, #{customerId,jdbcType=CHAR}, #{stage,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, #{activityId,jdbcType=CHAR}, 
+      #{contactsId,jdbcType=CHAR}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR}, 
+      #{editBy,jdbcType=VARCHAR}, #{editTime,jdbcType=CHAR}, #{description,jdbcType=VARCHAR}, 
+      #{contactSummary,jdbcType=VARCHAR}, #{nextContactTime,jdbcType=CHAR}, #{orderNo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.bjpowernode.crm.workbench.domain.TblTran" useGeneratedKeys="true">
+    insert into tbl_tran
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="owner != null">
+        `owner`,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="expectedDate != null">
+        expected_date,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="stage != null">
+        stage,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="source != null">
+        `source`,
+      </if>
+      <if test="activityId != null">
+        activity_id,
+      </if>
+      <if test="contactsId != null">
+        contacts_id,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="editBy != null">
+        edit_by,
+      </if>
+      <if test="editTime != null">
+        edit_time,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="contactSummary != null">
+        contact_summary,
+      </if>
+      <if test="nextContactTime != null">
+        next_contact_time,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="owner != null">
+        #{owner,jdbcType=CHAR},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="expectedDate != null">
+        #{expectedDate,jdbcType=CHAR},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="stage != null">
+        #{stage,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="activityId != null">
+        #{activityId,jdbcType=CHAR},
+      </if>
+      <if test="contactsId != null">
+        #{contactsId,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="editBy != null">
+        #{editBy,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null">
+        #{editTime,jdbcType=CHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="contactSummary != null">
+        #{contactSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="nextContactTime != null">
+        #{nextContactTime,jdbcType=CHAR},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bjpowernode.crm.workbench.domain.TblTran">
+    update tbl_tran
+    <set>
+      <if test="owner != null">
+        `owner` = #{owner,jdbcType=CHAR},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="expectedDate != null">
+        expected_date = #{expectedDate,jdbcType=CHAR},
+      </if>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="stage != null">
+        stage = #{stage,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        `source` = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="activityId != null">
+        activity_id = #{activityId,jdbcType=CHAR},
+      </if>
+      <if test="contactsId != null">
+        contacts_id = #{contactsId,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="editBy != null">
+        edit_by = #{editBy,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null">
+        edit_time = #{editTime,jdbcType=CHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="contactSummary != null">
+        contact_summary = #{contactSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="nextContactTime != null">
+        next_contact_time = #{nextContactTime,jdbcType=CHAR},
+      </if>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bjpowernode.crm.workbench.domain.TblTran">
+    update tbl_tran
+    set `owner` = #{owner,jdbcType=CHAR},
+      money = #{money,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      expected_date = #{expectedDate,jdbcType=CHAR},
+      customer_id = #{customerId,jdbcType=CHAR},
+      stage = #{stage,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=VARCHAR},
+      `source` = #{source,jdbcType=VARCHAR},
+      activity_id = #{activityId,jdbcType=CHAR},
+      contacts_id = #{contactsId,jdbcType=CHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=CHAR},
+      edit_by = #{editBy,jdbcType=VARCHAR},
+      edit_time = #{editTime,jdbcType=CHAR},
+      description = #{description,jdbcType=VARCHAR},
+      contact_summary = #{contactSummary,jdbcType=VARCHAR},
+      next_contact_time = #{nextContactTime,jdbcType=CHAR},
+      order_no = #{orderNo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+
+  <select id="selectByIdForDetail" resultMap="BaseResultMap">
+    select t1.id,u2.`name` owner, t1.money, t1.name, t1.expected_date, c1.name
+                           customer_id, v1.text stage, v3.text type, v2.text source, a1.name activity_id, c2.full_name contacts_id, u1.`name` create_by, t1.create_time, u3.name edit_by, t1.edit_time, t1.description, t1.contact_summary, t1.next_contact_time, t1.order_no
+    from tbl_tran t1
+           left join tbl_user u2 on t1.owner = u2.id
+           left join tbl_dic_value v1 on t1.stage = v1.id
+           left join tbl_dic_value v2 on t1.source = v2.id
+           left join tbl_user u1 on u1.id = t1.create_by
+           left join tbl_user u3 on u3.id = t1.edit_by
+           left join tbl_customer c1 on c1.id = t1.customer_id
+           left join tbl_contacts c2 on c2.id = t1.contacts_id
+           left JOIN tbl_dic_value v3 on v3.id = t1.type
+           left join tbl_activity a1 on a1.id = t1.activity_id
+    where t1.id = #{id}
+  </select>
+  <select id="selectTranByLimitAndCondition" resultMap="BaseResultMap">
+    select t1.id, t1.name, c1.name customer_id, v1.text stage, v3.text type, v2.text source,c2.full_name contacts_id
+    from tbl_tran t1
+           join tbl_dic_value v1 on t1.stage = v1.id
+           join tbl_dic_value v2 on t1.source = v2.id
+           left join tbl_customer c1 on c1.id = t1.customer_id
+           left join tbl_contacts c2 on c2.id = t1.contacts_id
+           JOIN tbl_dic_value v3 on v3.id = t1.type
+    <where>
+      <if test="name!=null and name!=''">
+        and t1.name like '%' #{name} '%'
+      </if>
+      <if test="customerId!=null and customerId!=''">
+        and c1.name like '%' #{customerId} '%'
+      </if>
+      <if test="stage!=null and stage!=''">
+        and t1.stage=#{stage}
+      </if>
+      <if test="type!=null and type!=''">
+        and t1.type=#{type}
+      </if>
+      <if test="source!=null and source!=''">
+        and t1.source=#{source}
+      </if>
+      <if test="contactsId!=null and contactsId!=''">
+        and c2.full_name=#{contactsId}
+      </if>
+    </where>
+    order by t1.id desc
+    limit #{pageNo},#{pageSize}
+  </select>
+  <select id="getTotalByCondition" resultType="java.lang.Integer">
+    select count(*)
+    from tbl_tran t1
+    join tbl_dic_value v1 on t1.stage = v1.id
+    join tbl_dic_value v2 on t1.source = v2.id
+    left join tbl_customer c1 on c1.id = t1.customer_id
+    left join tbl_contacts c2 on c2.id = t1.contacts_id
+    JOIN tbl_dic_value v3 on v3.id = t1.type
+    <where>
+      <if test="name!=null and name!=''">
+        and t1.name like '%' #{name} '%'
+      </if>
+      <if test="customerId!=null and customerId!=''">
+        and c1.name like '%' #{customerId} '%'
+      </if>
+      <if test="stage!=null and stage!=''">
+        and v1.text=#{stage}
+      </if>
+      <if test="type!=null and type!=''">
+        and v3.text=#{type}
+      </if>
+      <if test="source!=null and source!=''">
+        and v2.text=#{source}
+      </if>
+      <if test="contactsId!=null and contactsId!=''">
+      and c2.full_name=#{contactsId}
+      </if>
+    </where>
+  </select>
+    <select id="selectCountOfChart" resultType="com.bjpowernode.crm.workbench.domain.FunnelVO">
+      SELECT count(*) `value`,v1.text `name`
+      from tbl_dic_value v1
+             JOIN tbl_tran t1 on v1.id = t1.stage
+      GROUP BY t1.stage
+    </select>
+</mapper>
